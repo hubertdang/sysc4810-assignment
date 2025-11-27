@@ -2,7 +2,6 @@ from typing import NamedTuple
 from pathlib import Path
 from argon2 import PasswordHasher
 from argon2 import Type as ArgonType
-from argon2.exceptions import HashingError, VerifyMismatchError
 
 PASSWD_FILE = Path(__file__).parent.parent / 'passwd.txt'
 
@@ -12,7 +11,7 @@ NUM_RECORD_FIELDS = 2
 
 class UserRecord(NamedTuple):
     uname: str
-    passwd_hash: str
+    hash_str: str
 
 
 TIME_COST = 2  # Number of iterations
@@ -54,6 +53,6 @@ def get_user_record(uname: str) -> UserRecord | None:
             if stripped_line.startswith(uname + RECORD_DELIMITER):
                 fields = stripped_line.split(RECORD_DELIMITER, maxsplit=1)
                 if len(fields) == NUM_RECORD_FIELDS:
-                    _, passwd_hash = fields
-                    return UserRecord(uname=uname, passwd_hash=passwd_hash)
+                    _, hash_str = fields
+                    return UserRecord(uname=uname, hash_str=hash_str)
     return None
