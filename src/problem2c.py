@@ -5,11 +5,11 @@ from argon2 import Type as ArgonType
 
 PASSWD_FILE = Path(__file__).parent.parent / 'passwd.txt'
 
-RECORD_DELIMITER = ':'
-NUM_RECORD_FIELDS = 2
+PASSWD_FILE_RECORD_DELIMITER = ':'
+NUM_PASSWD_FILE_RECORD_FIELDS = 2
 
 
-class UserRecord(NamedTuple):
+class UserPasswdRecord(NamedTuple):
     uname: str
     hash_str: str
 
@@ -31,28 +31,36 @@ ph = PasswordHasher(
 )
 
 
-def add_user_record(uname: str, plaintext_passwd: str) -> None:
+def add_user_passwd_record(uname: str, plaintext_passwd: str) -> None:
     """
     Hashes and salts a plaintext password and adds a new user record to the
     password file.
     """
-    passwd_hash = ph.hash(plaintext_passwd)  # Argon2id adds salt for you
-    record = [uname, passwd_hash]
+    hash_str = ph.hash(plaintext_passwd)  # Argon2id adds salt for you
+    record = UserPasswdRecord(uname, hash_str)
 
     with open(PASSWD_FILE, 'a', encoding='utf-8') as passwd_file:
-        passwd_file.write(RECORD_DELIMITER.join(record) + '\n')
+        passwd_file.write(PASSWD_FILE_RECORD_DELIMITER.join(record) + '\n')
 
 
-def get_user_record(uname: str) -> UserRecord | None:
+def get_user_passwd_record(uname: str) -> UserPasswdRecord | None:
     """
     Retrieves a user record from the password file.
+
+    Returns:
+        The user record if it exists.
+        None otherwise.
     """
-    with open(PASSWD_FILE, 'r', encoding='utf-8') as passwd_file:
-        for line in passwd_file:
-            stripped_line = line.rstrip('\n')
-            if stripped_line.startswith(uname + RECORD_DELIMITER):
-                fields = stripped_line.split(RECORD_DELIMITER, maxsplit=1)
-                if len(fields) == NUM_RECORD_FIELDS:
-                    _, hash_str = fields
-                    return UserRecord(uname=uname, hash_str=hash_str)
-    return None
+    try:
+        with open(PASSWD_FILE, 'r', encoding='utf-8') as passwd_file:
+            for line in passwd_file:
+                stripped_line = line.rstrip('\n')
+                if stripped_line.startswith(uname + PASSWD_FILE_RECORD_DELIMITER):
+                    fields = stripped_line.split(
+                        PASSWD_FILE_RECORD_DELIMITER, maxsplit=1)
+                    if len(fields) == NUM_PASSWD_FILE_RECORD_FIELDS:
+                        _, hash_str = fields
+                        return UserPasswdRecord(uname=uname, hash_str=hash_str)
+    except FileNotFoundError:
+        return None  # Password file gets created when we add the first record
+    return None  # Couldn't find a record for this username

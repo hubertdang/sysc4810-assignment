@@ -19,7 +19,7 @@ class Operation(Enum):
 class Role(Enum):
     CLIENT = 'Client'
     PREMIUM_CLIENT = 'Premium Client'
-    EMPLOYEE = 'Base Employee'
+    EMPLOYEE = 'Employee'
     FINANCIAL_ADVISOR = 'Financial Advisor'
     FINANCIAL_PLANNER = 'Financial Planner'
     TELLER = 'Teller'

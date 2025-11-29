@@ -1,7 +1,7 @@
 if __name__ == "__main__":
     import unittest
     import os
-    from problem2c import PASSWD_FILE, ph, add_user_record, get_user_record
+    from problem2c import PASSWD_FILE, ph, add_user_passwd_record, get_user_passwd_record
 
     class TestPasswdFileUsage(unittest.TestCase):
         def setUp(self):
@@ -14,13 +14,14 @@ if __name__ == "__main__":
             # Clean up at the end to ensure we don't use a "test" passwd.txt
             if PASSWD_FILE.exists():
                 os.remove(PASSWD_FILE)
+            PASSWD_FILE.touch()
 
         def test_add_get_user_record(self):
             uname = 'hubert'
             plaintext_passwd = 'secret'
 
-            add_user_record(uname, plaintext_passwd)
-            stored_user_record = get_user_record(uname)
+            add_user_passwd_record(uname, plaintext_passwd)
+            stored_user_record = get_user_passwd_record(uname)
             self.assertIsNotNone(stored_user_record)
 
             stored_uname, stored_hash_str = stored_user_record
@@ -36,12 +37,13 @@ if __name__ == "__main__":
             uname = 'hubert'
             plaintext_passwd = 'secret'
 
-            stored_user_record = get_user_record(uname)  # Doesn't exist yet
+            stored_user_record = get_user_passwd_record(
+                uname)  # Doesn't exist yet
             self.assertIsNone(stored_user_record)
 
-            add_user_record(uname, plaintext_passwd)
+            add_user_passwd_record(uname, plaintext_passwd)
 
-            stored_user_record = get_user_record('idontexist')
+            stored_user_record = get_user_passwd_record('idontexist')
             self.assertIsNone(stored_user_record)
 
     unittest.main()
