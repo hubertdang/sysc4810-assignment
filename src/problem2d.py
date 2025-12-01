@@ -33,6 +33,13 @@ if __name__ == "__main__":
             self.assertEqual(uname, stored_uname)
             self.assertTrue(ph.verify(stored_hash_str, plaintext_passwd))
 
+            # Two of the same passwords should produce unique hashes
+            add_user_passwd_record('dina', 'secret')
+            dina_record = get_user_passwd_record('dina')
+            add_user_passwd_record(uname, plaintext_passwd)
+            hubert_record = get_user_passwd_record(uname)
+            self.assertNotEqual(dina_record.hash_str, hubert_record.hash_str)
+
         def test_get_non_existent_user_record(self):
             uname = 'hubert'
             plaintext_passwd = 'secret'

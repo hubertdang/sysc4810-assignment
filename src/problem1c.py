@@ -4,16 +4,16 @@ from typing import Set, Tuple
 
 
 class Operation(Enum):
-    VIEW_OWN_ACCOUNT_BALANCE = 1
-    VIEW_ANY_ACCOUNT_BALANCE = 2
-    VIEW_OWN_INVESTMENT_PORTFOLIO = 3
-    VIEW_ANY_INVESTMENT_PORTFOLIO = 4
-    MODIFY_OWN_INVESTMENT_PORTFOLIO = 5
-    MODIFY_ANY_INVESTMENT_PORTFOLIO = 6
-    VIEW_FINANCIAL_ADVISOR_CONTACT_INFO = 7
-    VIEW_FINANCIAL_PLANNER_CONTACT_INFO = 8
-    VIEW_MONEY_MARKET_INSTRUMENTS = 9
-    VIEW_PRIVATE_CONSUMER_INSTRUMENTS = 10
+    VIEW_OWN_ACCOUNT_BALANCE = 'View your own account balance'
+    VIEW_ANY_ACCOUNT_BALANCE = 'View any account balance'
+    VIEW_OWN_INVESTMENT_PORTFOLIO = 'View your own investment portfolio'
+    VIEW_ANY_INVESTMENT_PORTFOLIO = 'View any investment portfolio'
+    MODIFY_OWN_INVESTMENT_PORTFOLIO = 'Modify your own investment portfolio'
+    MODIFY_ANY_INVESTMENT_PORTFOLIO = 'Modify any investment portfolio'
+    VIEW_FINANCIAL_ADVISOR_CONTACT_INFO = 'View Financial Advisor contact info'
+    VIEW_FINANCIAL_PLANNER_CONTACT_INFO = 'View Financial Planner contact info'
+    VIEW_MONEY_MARKET_INSTRUMENTS = 'View money market instruments'
+    VIEW_PRIVATE_CONSUMER_INSTRUMENTS = 'View private consumer instruments'
 
 
 class Role(Enum):

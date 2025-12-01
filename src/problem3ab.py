@@ -125,7 +125,7 @@ def get_user_roles_record(uname: str) -> UserRolesRecord | None:
                                      for role in roles_str.split(',')}
                         else:
                             roles = set()  # Handle a user having no roles
-                        return UserRolesRecord(uname=uname, roles=roles)
+                        return UserRolesRecord(uname, roles)
     except FileNotFoundError:
         return None  # Roles file gets created when we add the first record
     return None  # Couldn't find a record for this username

@@ -60,7 +60,7 @@ def get_user_passwd_record(uname: str) -> UserPasswdRecord | None:
                         PASSWD_FILE_RECORD_DELIMITER, maxsplit=1)
                     if len(fields) == NUM_PASSWD_FILE_RECORD_FIELDS:
                         _, hash_str = fields
-                        return UserPasswdRecord(uname=uname, hash_str=hash_str)
+                        return UserPasswdRecord(uname, hash_str)
     except FileNotFoundError:
         return None  # Password file gets created when we add the first record
     return None  # Couldn't find a record for this username
