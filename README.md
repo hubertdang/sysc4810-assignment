@@ -5,11 +5,12 @@ A user authentication and access control system prototype.
 
 Please follow these steps from the project root directory:
 
-### 1. Install pip
+### 1. Install prerequisite packages
 
 ```bash
 sudo apt-get update
-sudo apt install python3-pip
+sudo apt install python3-pip # for installing dependencies
+sudo apt install python3-venv # for using a virtual environment
 ```
 
 ### 2. Create and Activate a Virtual Environment
