@@ -28,6 +28,7 @@ pip install -r requirements.txt
 
 ## How to Run the Program
 
+**Note**: This design uses *multi-role composition*, e.g., a Premium Client user type should be assigned both Client and Premium Client roles. More details on specific roles each user type ought to be assigned are described in my report. Keep in mind this design would rely on a hypothetical authoritative entity to ensure roles are correctly assigned to users.
 ```bash
 python3 src/main.py
 ```
