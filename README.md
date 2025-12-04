@@ -28,7 +28,9 @@ pip install -r requirements.txt
 
 ## How to Run the Program
 
-**Note**: This design uses *multi-role composition*, e.g., a Premium Client user type should be assigned both Client and Premium Client roles. More details on specific roles each user type ought to be assigned are described in my report. Keep in mind this design would rely on a hypothetical authoritative entity to ensure roles are correctly assigned to users.
+**Note**: This design uses *multi-role composition*, e.g., a Premium Client user type should be assigned both Client and Premium Client roles. More details on specific roles each user type ought to be assigned are described in my report. Keep in mind this design would rely on a hypothetical authoritative entity (assignment description says implementing this is out of scope) to ensure roles are correctly assigned to users based on their user type.
+
+**Note**: When the prompt for choosing roles comes up, **PLEASE** read the instructions on how to do so in the prompt. Do **NOT** just navigate to an option and then hit \<Enter\>. You must **select** your option(s) first (recall in most cases you must select multiple).
 ```bash
 python3 src/main.py
 ```
